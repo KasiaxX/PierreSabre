@@ -1,7 +1,5 @@
 package personnages;
 
-import java.io.ObjectInputStream.GetField;
-
 public class Humain {
 	
 	private String nom;
@@ -31,28 +29,30 @@ public class Humain {
 	public void boire() {
 		System.out.println(parler(" Mmmm, un bon verre de " + boissonFavori + "! GLOUPS !"));
 	}
-	
-	private void acheter(String bien, int prix) {
-		int money = argent - prix;
-		if(money < 0) {
-			System.out.println("Je n'ai plus que " + this.getArgent() + " sous en poche. Je ne peux même pas m'offrir un/une " 
-					+ bien + " à " + prix + " sous.");
-		}else{
-			System.out.println("J'ai " + prix + " sous en poche. Je vais pouvoir m'offrir un/une " + bien + " à " + prix + " sous.");
-//			perdreArgent(prix)
-		}
-		
-	}
 
 	private void perdreArgent(int perte) {
 		int money = argent - perte;
-		if(money < 0) {
-			argent = 0;			
-		}else {
+		if (money < 0) {
+			argent = 0;
+		} else {
 			argent = money;
 		}
 	}
-	
+
+	public void acheter(String bien, int prix) {
+		int money = argent - prix;
+		if (money < 0) {
+			System.out.println(parler(" Je n'ai plus que " + this.getArgent()
+					+ " sous en poche. Je ne peux même pas m'offrir un/une " + bien + " à " + prix + " sous."));
+		} else {
+			System.out.println(parler(" J'ai " + this.getArgent() + " sous en poche. Je vais pouvoir m'offrir un/une " + bien + " à " + prix
+					+ " sous."));
+			perdreArgent(prix);
+			;
+		}
+
+	}
+
 	private void gangerArgent(int gain) {
 		argent += gain;
 	}

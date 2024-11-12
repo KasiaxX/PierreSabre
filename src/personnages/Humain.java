@@ -1,27 +1,29 @@
 package personnages;
 
 public class Humain extends Personnage {
-	
+
 	protected String nom;
 	protected String boissonFavori;
 	protected int argent;
-	
+	protected int nbConnaissance;
+	protected int maxConnaissances = 3;
+	protected Humain[] memoire = new Humain[maxConnaissances];
+
 	public Humain(String nom, String boissonFavori, int argent) {
 		super();
 		this.nom = nom;
 		this.boissonFavori = boissonFavori;
 		this.argent = argent;
 	}
-	
-	
+
 	public String getNom() {
 		return nom;
 	}
-	
+
 	public int getArgent() {
 		return argent;
 	}
-	
+
 	protected void parler(String texte) {
 		System.out.println("(" + this.getNom() + ") " + "-" + texte);
 	}
@@ -54,6 +56,45 @@ public class Humain extends Personnage {
 			perdreArgent(prix);
 			;
 		}
+
+	}
+
+	private void repondre(Humain humain) {
+		direBonjour();
+		memoriser(humain);
+	}
+
+	private void memoriser(Humain humain) {
+
+		if (nbConnaissance == maxConnaissances) {
+			for (int i = 1; i < nbConnaissance; i++) {
+				memoire[i - 1] = memoire[i];
+			}
+			memoire[nbConnaissance - 1] = humain; // nbConnaissances-1 car si tableau a 3 places, 
+													// ses indices sont 0,1,2
+		} else {
+			memoire[nbConnaissance] = humain;
+			nbConnaissance++;
+		}
+
+	}
+
+	public void faireConnaissanceAvec(Humain autreHumain) {
+		direBonjour();
+		autreHumain.repondre(this);
+		memoriser(autreHumain);
+
+	}
+
+	public void listerConnaissance() {
+
+		String tab = " " + memoire[0].getNom();
+
+		for (int i = 1; i < nbConnaissance; i++) {
+			tab += ", " + memoire[i].getNom();
+
+		}
+		parler(" Je connais beaucoup de monde dont :" + tab);
 
 	}
 

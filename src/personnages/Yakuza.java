@@ -9,6 +9,13 @@ public class Yakuza extends Humain{
 		super(nom, boissonFavori, argent);
 		this.clan = clan;
 	}
+	
+	@Override
+	public void direBonjour() {
+		// TODO Auto-generated method stub
+		super.direBonjour();
+		parler(" Mon clan est celui de " + clan + ".");
+	}
 
 	public void extorquer(Commercant victime) {
 

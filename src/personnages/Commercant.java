@@ -6,6 +6,7 @@ public class Commercant extends Humain {
 		super(nom,"thè",argent);
 	}
 	
+
 	public int seFaireExtorquer() {
 		int sou = argent;
 		perdreArgent(argent);  //argent - argent = 0 , perdre tout

@@ -9,6 +9,7 @@ public class Ronin extends Humain{
 		this.honneur = honneur;
 
 	}
+
 	
 	public void donner(Commercant comm) {
 		int donner = argent/10;
